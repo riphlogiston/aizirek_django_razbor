@@ -3,6 +3,7 @@ from django.contrib.auth.base_user import BaseUserManager,AbstractBaseUser
 from django.core.mail import send_mail
 
 
+
 class UserManager(BaseUserManager):
     def _create(self, email, password, name, last_name, **extra_fields):
         if not email:
@@ -60,7 +61,7 @@ class User(AbstractBaseUser):
     
     def send_activation_email(self):
         activation_url=f'http://localhost:8000/account/activate/{self.activation_code}'
-        message='''
+        message=f'''
             You are signed up successfully!
             Activate your account {activation_url}
             '''
@@ -70,10 +71,4 @@ class User(AbstractBaseUser):
             'test@gmail.com', 
             [self.email, ]
         )
-
-
-
-
-
-
 
